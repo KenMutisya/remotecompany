@@ -81,6 +81,9 @@ export default {
                 openinnewtab: this.openinnewtab
             }).then(response => {
                 this.saving = false;
+                this.title = '';
+                this.link = '';
+                this.openinnewtab = '';
             }).catch(error => {
                 this.errors = error.response.data.errors;
                 this.saving = false;
