@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed inset-0 overflow-hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true" @click="closePanel">
+    <div class="fixed inset-0 overflow-hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true" >
         <div class="absolute inset-0 overflow-hidden">
             <div class="absolute inset-0" aria-hidden="true"></div>
             <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
@@ -19,11 +19,7 @@ export default {
     components: {ShowResource},
 
     props: ['resource'],
-    methods: {
-        closePanel() {
-            this.$parent.slideOut.open = false;
-        }
-    },
+
 }
 </script>
 

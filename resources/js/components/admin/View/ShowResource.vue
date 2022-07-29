@@ -1,11 +1,23 @@
 <script>
 import { h } from 'vue'
 import PDFResource from "./PDFResource";
+import HtmlResource from "./HtmlResource";
+import LinkResource from "./LinkResource";
 export default {
     props: ['resource'],
     render() {
         if (this.resource.resource_type === 'App\\Models\\PDFResource') {
             return h(PDFResource,{
+                resource: this.resource
+            });
+        }
+        if (this.resource.resource_type === "App\\Models\\HtmlResource") {
+            return h(HtmlResource,{
+                resource: this.resource
+            });
+        }
+        if (this.resource.resource_type === "App\\Models\\LinkResource") {
+            return h(LinkResource,{
                 resource: this.resource
             });
         }
