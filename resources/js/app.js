@@ -1,10 +1,10 @@
 import './bootstrap';
 
 import { createApp } from 'vue'
-// import HelloWorld from './components/Welcome'
+import CreateResource from "./components/admin/createResource";
 
 const app = createApp({})
 
-// app.component('hello-world', HelloWorld)
+app.component('create-resource', CreateResource)
 
 app.mount('#app')
