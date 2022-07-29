@@ -7,6 +7,8 @@
     <title>The Remote Company - Take Home Exercise</title>
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <script src="https://kit.fontawesome.com/b7fb0b123e.js" crossorigin="anonymous"></script>
+
 </head>
 <body class="antialiased">
 <div id="app">
