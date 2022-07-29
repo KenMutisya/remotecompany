@@ -14,7 +14,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                         <label for="first-name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Link </label>
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
-                            <input type="text" v-model="link"
+                            <input type="text" v-model="link" autocomplete="url"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                     </div>
@@ -45,9 +45,15 @@
                         class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Cancel
                 </button>
-                <button type="submit"
+                <button
+                        @click.prevent="saveLink"
                         class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Save
+                    <template v-if="!saving">
+                        Save
+                    </template>
+                    <template v-else>
+                        <i class="fa fa-spin fa-spinner"></i>
+                    </template>
                 </button>
             </div>
         </div>
@@ -59,10 +65,26 @@ export default {
     name: "LinkResource",
     data() {
         return {
+            errors: '',
             title: '',
             link: '',
             openinnewtab: '',
             saving: false
+        }
+    },
+    methods: {
+        saveLink() {
+            this.saving = true;
+            axios.post('/linkresource',{
+                title: this.title,
+                link: this.link,
+                openinnewtab: this.openinnewtab
+            }).then(response => {
+                this.saving = false;
+            }).catch(error => {
+                this.errors = error.response.data.errors;
+                this.saving = false;
+            }).finally(()=>this.saving = false);
         }
     },
 }
