@@ -7,14 +7,14 @@
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                         <label for="first-name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Title </label>
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
-                            <input type="text" v-model="name"
+                            <input type="text" v-model="title"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                     </div>
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                         <label for="first-name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Link </label>
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
-                            <input type="text" v-model="name"
+                            <input type="text" v-model="link"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                     </div>
@@ -23,7 +23,8 @@
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
                             <div class="relative flex items-start">
                                 <div class="flex items-center h-5">
-                                    <input id="comments" name="comments" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                    <input v-model="openinnewtab" type="checkbox"
+                                           class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
                                 </div>
                                 <div class="ml-3 text-sm">
                                     <label for="comments" class="font-medium text-gray-700">Open in a new Tab</label>
@@ -55,7 +56,15 @@
 
 <script>
 export default {
-    name: "LinkResource"
+    name: "LinkResource",
+    data() {
+        return {
+            title: '',
+            link: '',
+            openinnewtab: '',
+            saving: false
+        }
+    },
 }
 </script>
 
