@@ -9,13 +9,17 @@
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
                             <input type="text" v-model="title"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <p v-if="errors.title" class="text-red-500 text-xs italic mt-3">{{ errors.title.toString() }}.</p>
                         </div>
                     </div>
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                         <label for="first-name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Link </label>
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
-                            <input type="text" v-model="link" autocomplete="url"
+                            <input type="text" v-model="url" autocomplete="url"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
+                            <p v-if="errors.url" class="text-red-500 text-xs italic mt-3">{{ errors.url.toString() }}.</p>
+
                         </div>
                     </div>
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -67,7 +71,7 @@ export default {
         return {
             errors: '',
             title: '',
-            link: '',
+            url: '',
             openinnewtab: '',
             saving: false
         }
@@ -77,11 +81,12 @@ export default {
             this.saving = true;
             axios.post('/linkresource',{
                 title: this.title,
-                link: this.link,
+                url: this.url,
                 openinnewtab: this.openinnewtab
             }).then(response => {
                 this.saving = false;
                 this.title = '';
+                this.errors = '';
                 this.link = '';
                 this.openinnewtab = '';
             }).catch(error => {

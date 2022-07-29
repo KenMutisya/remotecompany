@@ -9,6 +9,8 @@
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
                             <input type="text" v-model="title"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <p v-if="errors.title" class="text-red-500 text-xs italic mt-3">{{ errors.title.toString() }}.</p>
+
                         </div>
                     </div>
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -16,6 +18,8 @@
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
                             <textarea  rows="3" v-model="snippetdescription"
                                       class="max-full shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"></textarea>
+                            <p v-if="errors.snippetdescription" class="text-red-500 text-xs italic mt-3">{{ errors.snippetdescription.toString() }}.</p>
+
                         </div>
                     </div>
                     <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -23,6 +27,8 @@
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
                             <textarea rows="3" v-model="snippet"
                                       class="max-full shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"></textarea>
+                            <p v-if="errors.snippet" class="text-red-500 text-xs italic mt-3">{{ errors.snippet.toString() }}.</p>
+
                         </div>
                     </div>
                 </div>
@@ -74,6 +80,7 @@ export default {
                 this.title = '';
                 this.snippetdescription = '';
                 this.snippet = '';
+                this.errors = '';
             }).catch(error => {
                 this.errors = error.response.data.errors;
                 this.saving = false;

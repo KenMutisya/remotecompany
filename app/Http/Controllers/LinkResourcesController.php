@@ -21,11 +21,11 @@ class LinkResourcesController extends Controller
     {
         $this->validate($request, [
             'title'        => 'required',
-            'link'         => ['required','url'],
+            'url'         => ['required','url'],
             'openinnewtab' => 'sometimes',
         ]);
 
-        $link->link = $request->link;
+        $link->link = $request->url;
         $link->openinnewtab = $request->openinnewtab ?: false;
         $link->save();
 
