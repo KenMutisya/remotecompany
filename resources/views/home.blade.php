@@ -8,6 +8,8 @@
 @endsection
 @section('content')
     <div class="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
-        <div class="border-4 border-dashed border-gray-200 rounded-lg h-96"></div>
+        <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">
+            <view-resources :resources='@json($resources)'></view-resources>
+        </div>
     </div>
 @endsection

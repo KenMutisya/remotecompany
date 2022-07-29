@@ -6,17 +6,17 @@ import LinkResource from "./LinkResource";
 export default {
     props: ['resource'],
     render() {
-        if (this.resource.resource_type === 'App\\Models\\PDFResource') {
+        if (this.resource.resource_type === 'PDF') {
             return h(PDFResource,{
                 resource: this.resource
             });
         }
-        if (this.resource.resource_type === "App\\Models\\HtmlResource") {
+        if (this.resource.resource_type === "HTML") {
             return h(HtmlResource,{
                 resource: this.resource
             });
         }
-        if (this.resource.resource_type === "App\\Models\\LinkResource") {
+        if (this.resource.resource_type === "Link") {
             return h(LinkResource,{
                 resource: this.resource
             });

@@ -4,7 +4,8 @@
             <div class="flex items-start justify-between">
                 <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">{{ resource.title}}</h2>
                 <div class="ml-3 flex h-7 items-center">
-                    <button type="button"
+                    <button
+                            @click.prevent="closePanel"
                             class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         <span class="sr-only">Close panel</span>
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -55,8 +56,12 @@ export default {
     name: "PDFResource",
     props: ['resource'],
     created() {
-        console.log(this.resource);
-    }
+    },
+    methods: {
+        closePanel() {
+            this.$parent.$parent.$parent.slideOut.open = false;
+        }
+    },
 }
 </script>
 

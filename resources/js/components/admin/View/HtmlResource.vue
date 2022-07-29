@@ -27,9 +27,11 @@
                 <dt class="text-sm font-medium text-gray-500">
                     HTML Snippet
                     <br>
-                    <button type="button"
-                            class="hidden sm:flex sm:items-center sm:justify-center relative w-9 h-9 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 text-gray-400 hover:text-gray-600 group ml-2.5"
-                            @click="copySnippet">
+                    <button
+                        :data-clipboard-text="resource.resource.snippet"
+                            class="copytext hidden sm:flex sm:items-center sm:justify-center relative w-9 h-9 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 text-gray-400 hover:text-gray-600 group ml-2.5"
+                            @click.prevent="copySnippet"
+                    >
                         <span class="sr-only">Copy code</span>
                         <span x-show="copied" style="display:none" class="absolute inset-x-0 bottom-full mb-2.5 flex justify-center"
                               x-transition:enter="transform ease-out duration-200 transition origin-bottom"
@@ -68,7 +70,22 @@
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     {{ resource.resource.snippet }}
+                    <div class="rounded-md bg-green-50 p-4" v-if="copied">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <!-- Heroicon name: solid/check-circle -->
+                                <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3" >
+                                <h3 class="text-sm font-medium text-green-800">Copied</h3>
+                            </div>
+                        </div>
+                    </div>
+
                 </dd>
+
             </div>
 
         </div>
@@ -76,20 +93,31 @@
 </template>
 
 <script>
+import ClipboardJS from 'clipboard'
 export default {
     name: "PDFResource",
     props: ['resource'],
+    data() {
+        return {
+            copied: false
+        }
+    },
     created() {
-        console.log(this.resource);
     },
     methods: {
         copySnippet() {
-            navigator.clipboard.writeText("mutisya");
-            // navigator.clipboard.writeText("ASAD").then(() => {
-            //     // Alert the user that the action took place.
-            //     // Nobody likes hidden stuff being done under the hood!
-            //     alert("Copied to clipboard");
-            // });
+            var clipboard = new ClipboardJS('.copytext');
+
+            let self = this;
+            clipboard.on('success', function(e) {
+                self.copied = true;
+                e.clearSelection();
+            });
+
+            clipboard.on('error', function(e) {
+                console.error('Action:', e.action);
+                console.error('Trigger:', e.trigger);
+            });
         },
         closePanel() {
             this.$parent.$parent.$parent.slideOut.open = false;

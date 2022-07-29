@@ -27,7 +27,7 @@
                             {{ resource.resource.link }}
                         </a>
                     </template>
-                    <template>
+                    <template v-else>
                         <a :href="resource.resource.link" class="text-blue-700">
                             {{ resource.resource.link }}
                         </a>
@@ -43,16 +43,11 @@ export default {
     name: "PDFResource",
     props: ['resource'],
     created() {
-        console.log(this.resource);
     },
     methods: {
         copySnippet() {
             navigator.clipboard.writeText("mutisya");
-            // navigator.clipboard.writeText("ASAD").then(() => {
-            //     // Alert the user that the action took place.
-            //     // Nobody likes hidden stuff being done under the hood!
-            //     alert("Copied to clipboard");
-            // });
+
         },
         closePanel() {
             this.$parent.$parent.$parent.slideOut.open = false;

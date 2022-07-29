@@ -24,10 +24,10 @@
                                 </div>
                                 <div class="hidden md:block">
                                     <div class="ml-10 flex items-baseline space-x-4">
-                                        <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                                        <a href="{{ route('home') }}" class="text-white px-3 py-2 rounded-md text-sm font-medium @if(Route::currentRouteName() == 'home') bg-gray-900 @endif"
                                            aria-current="page">Home</a>
                                         <a href="{{ route('admin.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md
-                                        text-sm
+                                        text-sm @if(\Illuminate\Support\Str::startsWith(Route::currentRouteName(),'admin')) bg-gray-900 @endif
                                         font-medium">Admin</a>
                                     </div>
                                 </div>

@@ -7,9 +7,7 @@ use App\Http\Controllers\PDFResourcesController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/',[AdminController::class,'index'])->name('home');
 
 Route::resource('admin',AdminController::class);
 
